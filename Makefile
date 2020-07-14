@@ -6,31 +6,34 @@
 #    By: mcathery <mcathery@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/09 16:52:53 by mcathery          #+#    #+#              #
-#    Updated: 2019/12/09 18:20:53 by mcathery         ###   ########.fr        #
+#    Updated: 2020/07/14 14:07:03 by hgalazza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 FLAGS = -Wall -Wextra -Werror
-HEAD = printf.h
+HEAD = ft_printf.h
+INCLUDES = ./
 
-FILES = main ft_printf
+FILES = ft_printf digit_work ft_ftoa itoa_base string_ft work_s_c work_specifications work_variable
 
 SRCS = $(addsuffix .c, $(FILES))
 OBJS = $(addsuffix .o, $(FILES))
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@gcc $(FLAGS) -o $(NAME) $(OBJS)
-
-%.o: %.c $(HEAD)
-	@gcc $(FLAGS) -c $< -o $@
+$(NAME):
+	@make -C libft/ re
+	gcc $(FLAGS) -I$(INCLUDES) -c $(SRCS)
+	ar -rc $(NAME) $(OBJECTS) libft/*.o
+	ranlib $(NAME)
 
 clean:
+	@make -C libft/ clean
 	@rm -rf $(OBJS)
 
 fclean: clean
+	@make -C libft/ fclean
 	@rm -rf $(NAME)
 
 re: fclean all

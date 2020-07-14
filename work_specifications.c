@@ -6,11 +6,11 @@
 /*   By: mcathery <mcathery@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 12:26:10 by mcathery          #+#    #+#             */
-/*   Updated: 2020/07/10 13:26:43 by hgalazza         ###   ########.fr       */
+/*   Updated: 2020/07/14 13:46:21 by hgalazza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 void	ft_mod(t_flags *flags, const char *str)
 {
@@ -26,12 +26,12 @@ void	ft_mod(t_flags *flags, const char *str)
 	}
 	while (str[flags->length] == 'L')
 	{
-		flags->L_flag = 1;
+		flags->bl_flag = 1;
 		flags->length++;
 	}
 }
 
-int 	valid_flags(const char c)
+int		valid_flags(const char c)
 {
 	if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0')
 		return (1);
@@ -66,13 +66,13 @@ void	ft_flags(t_flags *flags, const char *str)
 		flags->fill = ' ';
 }
 
-t_flags work_spec(const char *str)
+t_flags	work_spec(const char *str)
 {
 	t_flags	flags;
 
 	ft_bzero(&flags, sizeof(t_flags));
 	if (*str == '\0')
-		return(flags);
+		return (flags);
 	ft_flags(&flags, str);
 	if (str[flags.length] >= '1' && str[flags.length] <= '9')
 	{
@@ -87,8 +87,7 @@ t_flags work_spec(const char *str)
 		while (str[flags.length] >= '0' && str[flags.length] <= '9')
 			flags.length++;
 	}
-
 	ft_mod(&flags, str);
 	flags.spec = (str[flags.length++]);
-	return(flags);
+	return (flags);
 }

@@ -6,13 +6,13 @@
 /*   By: hgalazza <hgalazza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 14:03:20 by hgalazza          #+#    #+#             */
-/*   Updated: 2020/07/10 16:04:28 by hgalazza         ###   ########.fr       */
+/*   Updated: 2020/07/14 13:20:54 by hgalazza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-static char *sharp_work(int spec, char *arg, int prec)
+static char	*sharp_work(int spec, char *arg, int prec)
 {
 	if (!ft_strcmp(arg, "0") && spec != 'p')
 		return (arg);
@@ -25,11 +25,11 @@ static char *sharp_work(int spec, char *arg, int prec)
 	return (arg);
 }
 
-static char *prec_work(char *arg, char *tire, t_flags flags)
+static char	*prec_work(char *arg, char *tire, t_flags flags)
 {
-	int len;
-	char *s;
-	char *dot;
+	int		len;
+	char	*s;
+	char	*dot;
 
 	dot = ft_strchr(arg, '.');
 	if (flags.spec != 'f' || !dot)
@@ -44,32 +44,29 @@ static char *prec_work(char *arg, char *tire, t_flags flags)
 	{
 		s = ft_strnew(flags.prec - len);
 		ft_memset(s, '0', flags.prec - len);
-		if (flags.spec != 'f')
-			s = ft_str_un(s, arg, 1);
-		else
-			s = ft_str_un(arg, s, 1);
+		s = (flags.spec != 'f') ? ft_str_un(s, arg, 1)\
+		: ft_str_un(arg, s, 1);
 		if (tire)
 			ft_swap(ft_strchr(s, '-'), s);
 		return (s);
 	}
-	return(arg);
+	return (arg);
 }
 
-static char *width_work(char *arg, t_flags flags, int len)
+static char	*width_work(char *arg, t_flags flags, int len)
 {
-	char *str;
-	char *tire;
+	char	*str;
+	char	*tire;
 
 	tire = ft_strchr(arg, '-');
-	if (len < flags.width) {
+	if (len < flags.width)
+	{
 		str = ft_strnew(flags.width - len);
 		ft_memset(str, flags.fill, flags.width - len);
 		if (flags.spec == 'd' && flags.space && flags.fill == '0' && !tire)
 			str[0] = ' ';
-		if (flags.minus || flags.spec == 'p')
-			arg = ft_str_un(arg, str, 1);
-		else
-			ft_str_un(str, arg, 1);
+		arg = (flags.minus || flags.spec == 'p') ?\
+		ft_str_un(arg, str, 1) : ft_str_un(str, arg, 1);
 		tire = ft_strchr(arg, '-');
 		if (tire && flags.fill == '0')
 			ft_swap(arg, tire);
@@ -79,19 +76,19 @@ static char *width_work(char *arg, t_flags flags, int len)
 		(flags.spec == 'd' || flags.spec == 'f'))
 			ft_swap(ft_strchr(arg, '0'), ft_strchr(arg, '+'));
 	}
-	else if (flags.space &&(flags.spec == 'd' || flags.spec == 'f') && !tire)
+	else if (flags.space && (flags.spec == 'd' || flags.spec == 'f') && !tire)
 		arg = ft_str_un(" ", arg, 2);
-	return(arg);
+	return (arg);
 }
 
-char *digit_work(char *arg, t_flags flags, char spec)
+char		*digit_work(char *arg, t_flags flags, char spec)
 {
-	char *tire;
+	char	*tire;
 
 	flags.spec = spec;
 	tire = ft_strchr(arg, '-');
 	arg = prec_work(arg, tire, flags);
-	if	(flags.sharp || spec == 'p')
+	if (flags.sharp || spec == 'p')
 		arg = sharp_work(spec, arg, flags.prec);
 	if (!flags.prec && !ft_strcmp(arg, "0")\
 	&& (spec == 'x' || spec == '0' || spec == 'd')\

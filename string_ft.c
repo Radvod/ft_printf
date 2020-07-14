@@ -6,11 +6,11 @@
 /*   By: hgalazza <hgalazza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 15:35:13 by hgalazza          #+#    #+#             */
-/*   Updated: 2020/07/10 17:18:29 by hgalazza         ###   ########.fr       */
+/*   Updated: 2020/07/14 13:31:36 by hgalazza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 void	ft_swap(char *c1, char *c2)
 {
@@ -23,8 +23,8 @@ void	ft_swap(char *c1, char *c2)
 
 char	*ft_str_un(char *s1, char *s2, int i)
 {
-	char *new;
-	size_t len;
+	char	*new;
+	size_t	len;
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
@@ -42,20 +42,20 @@ char	*ft_str_un(char *s1, char *s2, int i)
 		free(s2);
 	else if (i == 3)
 		free(s1);
-	return(new);
+	return (new);
 }
 
 char	*ft_addch(char *str, char ch)
 {
-	int len;
-	char *new;
+	int		len;
+	char	*new;
 
 	len = 0;
-	if(str)
+	if (str)
 	{
 		len = ft_strlen(str);
-		if (!(new  = (char*)ft_strnew(len + 1)))
-			return(NULL);
+		if (!(new = (char*)ft_strnew(len + 1)))
+			return (NULL);
 		ft_strcat(new, str);
 		ft_strdel(&str);
 	}

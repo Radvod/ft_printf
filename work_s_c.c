@@ -6,11 +6,11 @@
 /*   By: hgalazza <hgalazza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 13:06:10 by hgalazza          #+#    #+#             */
-/*   Updated: 2020/07/10 13:24:28 by hgalazza         ###   ########.fr       */
+/*   Updated: 2020/07/14 13:32:35 by hgalazza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int		putstr_for_null_char(char *s)
 {
@@ -27,10 +27,10 @@ int		putstr_for_null_char(char *s)
 	return (i);
 }
 
-char *str_work(char *arg, t_flags flags)
+char	*str_work(char *arg, t_flags flags)
 {
-	char *str;
-	int len;
+	char	*str;
+	int		len;
 
 	len = ft_strlen(arg);
 	if (flags.prec != -1 && flags.prec < len && flags.spec != '%')
@@ -50,7 +50,7 @@ char *str_work(char *arg, t_flags flags)
 	return (arg);
 }
 
-char *work_s_c(t_flags *flags, va_list *ap)
+char	*work_s_c(t_flags *flags, va_list *ap)
 {
 	char *str;
 	char ch;
