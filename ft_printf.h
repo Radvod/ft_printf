@@ -43,7 +43,6 @@ char			*ft_itoa_long(long nbr);
 char			*ft_itoa_base_unsigned(size_t nbr, int base);
 char			*ft_itoa_base(unsigned int nbr, int base);
 char			*ft_ftoa_long(long double nbr, unsigned int precision);
-char			*ft_ftoa(double nbr, unsigned int precision);
 void			ft_swap(char *c1, char *c2);
 char			*digit_work(char *arg, t_flags flags, char spec);
 char			*work_variable(t_flags *flags, va_list *ap);
@@ -53,5 +52,6 @@ void			ft_mod(t_flags *flags, const char *str);
 void			ft_flags(t_flags *flags, const char *str);
 char			*work_s_c(t_flags *flags, va_list *ap);
 char			*str_work(char *arg, t_flags flags);
+int				ft_printf(const char *format, ...);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: hgalazza <hgalazza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 13:52:53 by hgalazza          #+#    #+#             */
-/*   Updated: 2020/07/10 16:06:57 by hgalazza         ###   ########.fr       */
+/*   Updated: 2020/07/16 18:20:44 by hgalazza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*ft_itoa_unsigned(size_t nbr)
+char	*ft_itoa_unsigned(size_t nbr)
 {
 	char ch;
 	char *str;
@@ -24,7 +24,7 @@ char		*ft_itoa_unsigned(size_t nbr)
 	return (ft_addch(str, ch));
 }
 
-char		*ft_itoa_long(long nbr)
+char	*ft_itoa_long(long nbr)
 {
 	if (nbr < 0)
 		return (ft_str_un("-", ft_itoa_unsigned(-nbr), 2));
@@ -32,7 +32,7 @@ char		*ft_itoa_long(long nbr)
 		return (ft_itoa_unsigned(nbr));
 }
 
-static char	convert(int i)
+char	convert(int i)
 {
 	char *nums;
 
@@ -40,7 +40,7 @@ static char	convert(int i)
 	return (nums[i]);
 }
 
-char		*ft_itoa_base(unsigned int nbr, int base)
+char	*ft_itoa_base(unsigned int nbr, int base)
 {
 	char ch;
 	char *str;
@@ -52,7 +52,7 @@ char		*ft_itoa_base(unsigned int nbr, int base)
 	return (ft_addch(str, ch));
 }
 
-char		*ft_itoa_base_unsigned(size_t nbr, int base)
+char	*ft_itoa_base_unsigned(size_t nbr, int base)
 {
 	char ch;
 	char *str;

@@ -6,7 +6,7 @@
 /*   By: hgalazza <hgalazza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 15:35:13 by hgalazza          #+#    #+#             */
-/*   Updated: 2020/07/14 13:31:36 by hgalazza         ###   ########.fr       */
+/*   Updated: 2020/07/17 18:56:39 by hgalazza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ char	*ft_str_un(char *s1, char *s2, int i)
 	char	*new;
 	size_t	len;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	if (!(new = ft_strnew(len)))
 		return (NULL);

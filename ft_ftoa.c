@@ -6,13 +6,13 @@
 /*   By: hgalazza <hgalazza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 17:03:55 by hgalazza          #+#    #+#             */
-/*   Updated: 2020/07/10 17:05:28 by hgalazza         ###   ########.fr       */
+/*   Updated: 2020/07/17 19:39:36 by hgalazza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	approximator(char *fract, double nbr)
+int		approximator(char *fract, double nbr)
 {
 	int apr;
 	int i;
@@ -37,7 +37,7 @@ static int	approximator(char *fract, double nbr)
 	return (1);
 }
 
-char		*ft_ftoa_long(long double nbr, unsigned int precision)
+char	*ft_ftoa_long(long double nbr, unsigned int precision)
 {
 	int			i;
 	size_t		whole;
@@ -62,9 +62,4 @@ char		*ft_ftoa_long(long double nbr, unsigned int precision)
 	return (sign < 0) ? ft_str_un("-",\
 	ft_str_un(ft_addch(ft_itoa_unsigned(whole), ch), fract, 3), 2)\
 	: ft_str_un(ft_addch(ft_itoa_unsigned(whole), ch), fract, 3);
-}
-
-char		*ft_ftoa(double nbr, unsigned int precision)
-{
-	return (ft_ftoa_long(nbr, precision));
 }

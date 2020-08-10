@@ -6,13 +6,13 @@
 /*   By: hgalazza <hgalazza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 14:03:20 by hgalazza          #+#    #+#             */
-/*   Updated: 2020/07/14 13:20:54 by hgalazza         ###   ########.fr       */
+/*   Updated: 2020/07/17 18:13:39 by hgalazza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*sharp_work(int spec, char *arg, int prec)
+char	*sharp_work(int spec, char *arg, int prec)
 {
 	if (!ft_strcmp(arg, "0") && spec != 'p')
 		return (arg);
@@ -20,12 +20,12 @@ static char	*sharp_work(int spec, char *arg, int prec)
 		arg[0] = '\0';
 	if (spec == 'x' || spec == 'p')
 		return (ft_str_un("0x", arg, 2));
-	else if (spec == 'o')
+	else if (spec == 'o' && (prec == -1 || prec == 0))
 		return (ft_str_un("0", arg, 2));
 	return (arg);
 }
 
-static char	*prec_work(char *arg, char *tire, t_flags flags)
+char	*prec_work(char *arg, char *tire, t_flags flags)
 {
 	int		len;
 	char	*s;
@@ -53,7 +53,7 @@ static char	*prec_work(char *arg, char *tire, t_flags flags)
 	return (arg);
 }
 
-static char	*width_work(char *arg, t_flags flags, int len)
+char	*width_work(char *arg, t_flags flags, int len)
 {
 	char	*str;
 	char	*tire;
@@ -65,7 +65,7 @@ static char	*width_work(char *arg, t_flags flags, int len)
 		ft_memset(str, flags.fill, flags.width - len);
 		if (flags.spec == 'd' && flags.space && flags.fill == '0' && !tire)
 			str[0] = ' ';
-		arg = (flags.minus || flags.spec == 'p') ?\
+		arg = (flags.minus) ?\
 		ft_str_un(arg, str, 1) : ft_str_un(str, arg, 1);
 		tire = ft_strchr(arg, '-');
 		if (tire && flags.fill == '0')
@@ -81,7 +81,7 @@ static char	*width_work(char *arg, t_flags flags, int len)
 	return (arg);
 }
 
-char		*digit_work(char *arg, t_flags flags, char spec)
+char	*digit_work(char *arg, t_flags flags, char spec)
 {
 	char	*tire;
 
@@ -91,7 +91,7 @@ char		*digit_work(char *arg, t_flags flags, char spec)
 	if (flags.sharp || spec == 'p')
 		arg = sharp_work(spec, arg, flags.prec);
 	if (!flags.prec && !ft_strcmp(arg, "0")\
-	&& (spec == 'x' || spec == '0' || spec == 'd')\
+	&& (spec == 'x' || spec == 'o' || spec == 'd')\
 	&& !(flags.sharp && spec == 'o'))
 		arg[0] = '\0';
 	if (!tire && flags.plus && (spec == 'd' || spec == 'f'))

@@ -6,7 +6,7 @@
 /*   By: hgalazza <hgalazza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 13:06:10 by hgalazza          #+#    #+#             */
-/*   Updated: 2020/07/14 13:32:35 by hgalazza         ###   ########.fr       */
+/*   Updated: 2020/07/17 19:27:38 by hgalazza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@ int		putstr_for_null_char(char *s)
 
 	i = 0;
 	if (s != NULL)
+	{
 		while (s[i] != '\0')
 		{
-			if (s[i] == '?')
-				ft_putchar('^');
-			ft_putchar(s[i++]);
+			if (s[i] == '@')
+				ft_putchar(0);
+			else
+				ft_putchar(s[i]);
+			i++;
 		}
+	}
 	return (i);
 }
 
@@ -33,7 +37,8 @@ char	*str_work(char *arg, t_flags flags)
 	int		len;
 
 	len = ft_strlen(arg);
-	if (flags.prec != -1 && flags.prec < len && flags.spec != '%')
+	if (flags.prec != -1 && flags.prec < len &&\
+	flags.spec != '%' && flags.spec != 'N')
 	{
 		arg[flags.prec] = '\0';
 		len = flags.prec;
@@ -71,8 +76,8 @@ char	*work_s_c(t_flags *flags, va_list *ap)
 			str = str_work(ft_addch(NULL, ch), *flags);
 		else
 		{
-			str = str_work(ft_strdup("?"), *flags);
 			flags->spec = 'N';
+			str = str_work(ft_strdup("@"), *flags);
 		}
 	}
 	return (str);

@@ -6,7 +6,7 @@
 #    By: mcathery <mcathery@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/09 16:52:53 by mcathery          #+#    #+#              #
-#    Updated: 2020/07/14 14:07:03 by hgalazza         ###   ########.fr        #
+#    Updated: 2020/07/14 14:29:48 by hgalazza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ all: $(NAME)
 $(NAME):
 	@make -C libft/ re
 	gcc $(FLAGS) -I$(INCLUDES) -c $(SRCS)
-	ar -rc $(NAME) $(OBJECTS) libft/*.o
+	ar -rc $(NAME) $(OBJS) libft/*.o
 	ranlib $(NAME)
 
 clean:
