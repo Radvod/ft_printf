@@ -7,8 +7,8 @@ To recode libc's `printf`.
 
 ft_printf must be formatted in the same manor as libc's `printf`. For example:
 ```c
-ft_printf("Welcome to %d, %s!\n", 42, cadet);
-printf("Welcome to %d, %s!\n", 42, cadet);
+ft_printf("Welcome to %d, %s!\n", 42, "cadet");
+printf("Welcome to %d, %s!\n", 42, "cadet");
 ```
 Should give back:
 ```console
