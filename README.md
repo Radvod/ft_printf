@@ -2,5 +2,5 @@
 
 ### Score 102/100
 
-![Score](Score.png)
+![Score](score.png)
 
