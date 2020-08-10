@@ -31,4 +31,5 @@ Then compile with a program:
 ```console
 gcc -Wall -Werror -Wextra main.c libftprintf.a -o run; ./run
 ```
-Special thanks to my partner mcathery
+***
+Special thanks to my partner mcathery :)
